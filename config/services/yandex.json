@@ -1,0 +1,9 @@
+{
+	"auth_url" : "",
+	"app" : {
+		"title" : "Яндекс",
+		"id" : "",
+		"secret" : "",
+		"callback_url" : ""
+	}
+}

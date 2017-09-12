@@ -1,0 +1,7 @@
+html
+	include _/head
+	body
+		include _/header
+		each service in data.services
+			p <a href="/auth/by/#{service.uid}/" >#{service.title}</a>
+		include _/footer

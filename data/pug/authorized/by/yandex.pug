@@ -1,0 +1,8 @@
+html
+	include ../../_/head
+	body
+		include ../../_/header
+		p Вы авторизовались с помощью #{data.service.app.title}
+		each access in data.accesses
+			p <a href="#{access.title}" >#{access.title}</a>
+		include ../../_/footer
