@@ -1,6 +1,6 @@
 {
 	"title" : "Default Bitrix",
-	"target_url" : "/bitrix/admin/?login=yes&redirect=1",
+	"target_url" : "/bitrix/admin/?login=yes",
 	"fields" : [
 		{
 			"name" : "AUTH_FORM",

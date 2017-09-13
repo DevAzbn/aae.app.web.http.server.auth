@@ -42,4 +42,23 @@ $(function() {
 		
 	}
 	
+	/*
+	$(document.body).on('submit.azbn7', '.azbn7__auth__form_auto', null, function(event){
+		event.preventDefault();
+		
+		var _form = $(this).clone();
+		_form
+			.attr('class', '')
+			.css({
+				display : 'none',
+			})
+			.appendTo($(document.body))
+		;
+		_form.trigger('submit');
+		
+		//window.open($(this).attr('action'))
+		
+	});
+	*/
+	
 });

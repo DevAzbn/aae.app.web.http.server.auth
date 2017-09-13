@@ -68,6 +68,7 @@ function _(app, azbn) {
 						title : 'Авторизованы с помощью ' + _service.app.title,
 					},
 				},
+				session : req.session.authorized,
 				data : {
 					service : _service,
 					authorized : req.session.authorized,
@@ -77,7 +78,7 @@ function _(app, azbn) {
 			
 		} else {
 			
-			res.sendStatus(404);
+			res.redirect(307, '/');
 			
 		}
 		

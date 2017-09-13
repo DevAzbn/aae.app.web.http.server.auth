@@ -18,6 +18,7 @@ function _(app, azbn) {
 						title : 'Выберите сервис для подключения',
 					},
 				},
+				session : {},
 				data : {
 					services : [
 						{
