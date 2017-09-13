@@ -6,6 +6,8 @@ function _(app, azbn) {
 	
 	return function(req, res) {
 		
+		app.clearRequireCache(require);
+		
 		if(req.params.service && req.params.service != '' && req.session.authorized && req.session.authorized.by && req.session.authorized.by == req.params.service) {
 			
 			/*
@@ -18,8 +20,6 @@ function _(app, azbn) {
 				}
 			});
 			*/
-			
-			app.clearRequireCache(require);
 			
 			var _service = app.loadJSON('../config/services/' + req.params.service);
 			var _account_bounds = app.loadJSON('../data/json/account_bounds/' + req.params.service + '/' + req.session.authorized.account.login);

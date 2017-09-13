@@ -1,0 +1,18 @@
+{
+	"title" : "Default Wordpress",
+	"target_url" : "/wp-login.php",
+	"fields" : [
+		{
+			"name" : "log",
+			"value" : "test"
+		},
+		{
+			"name" : "pwd",
+			"value" : "test"
+		},
+		{
+			"name" : "rememberme",
+			"value" : "forever"
+		}
+	]
+}

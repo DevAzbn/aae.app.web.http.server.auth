@@ -1,0 +1,22 @@
+{
+	"title" : "Default Bitrix",
+	"target_url" : "/bitrix/admin/?login=yes&redirect=1",
+	"fields" : [
+		{
+			"name" : "AUTH_FORM",
+			"value" : "N"
+		},
+		{
+			"name" : "TYPE",
+			"value" : "AUTH"
+		},
+		{
+			"name" : "USER_LOGIN",
+			"value" : "test"
+		},
+		{
+			"name" : "USER_PASSWORD",
+			"value" : "test"
+		}
+	]
+}

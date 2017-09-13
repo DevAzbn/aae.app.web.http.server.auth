@@ -6,6 +6,8 @@ function _(app, azbn) {
 	
 	return function(req, res) {
 		
+		app.clearRequireCache(require);
+		
 		switch(req.params.service) {
 			
 			case 'yandex' : {

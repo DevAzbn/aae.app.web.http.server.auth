@@ -8,6 +8,8 @@ function _(app, azbn) {
 		
 		if(req.params.service) {
 			
+			app.clearRequireCache(require);
+			
 			var _service = app.loadJSON('../config/services/' + req.params.service);
 			
 			if(_service && _service.auth_url) {

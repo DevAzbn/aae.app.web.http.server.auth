@@ -4,5 +4,9 @@ html
 		include ../../_/header
 		p Вы авторизовались с помощью #{data.service.app.title}
 		each access in data.accesses
-			p <a href="#{access.title}" >#{access.title}</a>
+			div
+				form(target='_blank' method='POST' action=access.target_url)
+					each field in access.fields
+						input(type='hidden' name=field.name value=field.value)
+					input(type='submit' value=access.title)
 		include ../../_/footer
