@@ -12,7 +12,7 @@ function _(app, azbn) {
 			
 			if(_service && _service.auth_url) {
 				
-				res.redirect(301, _service.auth_url);
+				res.redirect(307, _service.auth_url);
 				
 			} else {
 				

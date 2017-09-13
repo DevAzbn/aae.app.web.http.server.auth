@@ -1,0 +1,8 @@
+{
+	"title" : "SexStroy. 2",
+	"target_url" : "https://yandex.ru/",
+	"access" : {
+		"login" : "test",
+		"password" : "test"
+	}
+}

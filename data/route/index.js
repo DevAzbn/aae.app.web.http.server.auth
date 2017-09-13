@@ -6,29 +6,39 @@ function _(app, azbn) {
 	
 	return function(req, res) {
 		
-		res.render('index', {
-			html : {
-				head : {
-					title : 'Выберите сервис для подключения',
+		if(req && req.session && req.session.authorized && req.session.authorized.by) {
+			
+			res.redirect(307, '/authorized/by/' + req.session.authorized.by + '/');
+			
+		} else {
+			
+			res.render('index', {
+				html : {
+					head : {
+						title : 'Выберите сервис для подключения',
+					},
 				},
-			},
-			data : {
-				services : [
-					{
-						uid : 'yandex',
-						title : 'Yandex',
-					},
-					{
-						uid : 'google',
-						title : 'Google',
-					},
-					{
-						uid : 'vk',
-						title : 'VK.com',
-					},
-				],
-			},
-		});
+				data : {
+					services : [
+						{
+							uid : 'yandex',
+							title : 'Yandex',
+						},
+						/*
+						{
+							uid : 'google',
+							title : 'Google',
+						},
+						{
+							uid : 'vk',
+							title : 'VK.com',
+						},
+						*/
+					],
+				},
+			});
+			
+		}
 		
 	};
 }

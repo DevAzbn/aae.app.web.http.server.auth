@@ -34,10 +34,11 @@ function _(app, azbn) {
 							
 							req.session.authorized = {
 								by : req.params.service,
+								account : null,
 							};
 							req.session.access = JSON.parse(body);
 							
-							azbn.mdl('web/http').r('POST', 'https://login.yandex.ru/info?format=json&with_openid_identity=1&oauth_token=' + req.session.access.access_token, {
+							azbn.mdl('web/http').r('GET', 'https://login.yandex.ru/info?format=json&oauth_token=' + req.session.access.access_token, {//&with_openid_identity=1
 								
 							}, function(_error, _response, _body){
 								
@@ -73,21 +74,28 @@ function _(app, azbn) {
 									*/
 									req.session.authorized.account = _account;
 									
-									app.saveJSON('../config/accounts/' + req.params.service + '/' + _account.login, _account);
+									app.saveJSON('../data/json/accounts/' + req.params.service + '/' + _account.login, _account);
+									
+									req.session.save(function(err) {
+										res.redirect(307, '/authorized/by/' + req.params.service + '/');
+									});
 									
 								}
 								
 							});
 							
-							
-							
-							res.redirect(301, '/authorized/by/' + req.params.service + '/');
-							
 						}
 						
-						//res.redirect(301, '/');
+						//res.redirect(307, '/');
 						
 					});
+					
+				} else if(req.query.error) {
+					
+					// /authorize/by/yandex/?error=access_denied&error_description=Пользователь%20запретил%20доступ%20приложения%20к%20данным
+					// res.sendStatus(403, req.query.error_description);
+					
+					res.redirect(307, '/');
 					
 				}
 				
