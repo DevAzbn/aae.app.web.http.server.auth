@@ -22,7 +22,7 @@ function _(app, azbn) {
 			*/
 			
 			var _service = app.loadJSON('../config/services/' + req.params.service);
-			var _account_bounds = app.loadJSON('../data/json/account_bounds/' + req.params.service + '/' + req.session.authorized.account.login);
+			var _account_bounds = app.loadJSON('../data/json/account_bounds/' + req.params.service + '/' + req.session.authorized.account.email);
 			
 			var groups = [];
 			var accesses = [];

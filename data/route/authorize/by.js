@@ -104,6 +104,76 @@ function _(app, azbn) {
 			}
 			break;
 			
+			case 'google' : {
+				
+				if(req.query.code) {
+					
+					var _app = app.loadJSON('../config/services/' + req.params.service);
+					
+					azbn.mdl('web/http').r('POST', 'https://accounts.google.com/o/oauth2/token', {
+						grant_type : 'authorization_code',
+						code : req.query.code,
+						client_id : _app.app.id,
+						client_secret : _app.app.secret,
+						redirect_uri : 'http://localhost:17003/authorize/by/google/'
+					}, function(error, response, body){
+						
+						console.log(body);
+						
+						if(error) {
+							
+							res.send(error);
+							
+						} else {
+							
+							req.session.authorized = {
+								by : req.params.service,
+								account : null,
+							};
+							req.session.access = JSON.parse(body);
+							
+							azbn.mdl('web/http').r('GET', 'https://www.googleapis.com/oauth2/v1/userinfo?format=json&oauth_token=' + req.session.access.access_token, {//&with_openid_identity=1
+								
+							}, function(_error, _response, _body){
+								
+								if(_error) {
+									
+									res.send(_error);
+									
+								} else {
+									
+									var _account = JSON.parse(_body);
+									
+									/*
+									
+									*/
+									req.session.authorized.account = _account;
+									
+									app.saveJSON('../data/json/accounts/' + req.params.service + '/' + _account.email, _account);
+									
+									req.session.save(function(err) {
+										res.redirect(307, '/authorized/by/' + req.params.service + '/');
+									});
+									
+								}
+								
+							});
+							
+						}
+						
+						//res.redirect(307, '/');
+						
+					});
+					
+				} else {
+					
+					res.redirect(307, '/');
+					
+				}
+				
+			}
+			break;
+			
 			default : {
 				
 			}

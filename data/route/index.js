@@ -25,11 +25,11 @@ function _(app, azbn) {
 							uid : 'yandex',
 							title : 'Yandex',
 						},
-						/*
 						{
 							uid : 'google',
 							title : 'Google',
 						},
+						/*
 						{
 							uid : 'vk',
 							title : 'VK.com',
