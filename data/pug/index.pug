@@ -2,6 +2,7 @@ html
 	include _/head
 	body
 		include _/header
+		p Авторизация на сервисе через:
 		each service in data.services
 			p <a href="/auth/by/#{service.uid}/" >#{service.title}</a>
 		include _/footer
