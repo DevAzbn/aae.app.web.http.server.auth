@@ -1,3 +1,4 @@
 -p
-data/sessions.nedb
-config
+data/sessions/sessions.nedb
+data/json/*.json
+config/services/*.json
