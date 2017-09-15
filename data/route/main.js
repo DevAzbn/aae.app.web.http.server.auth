@@ -4,15 +4,15 @@
 
 function _(app, azbn) {
 	
-	var strategy = {
-		yandex : require('passport-yandex').Strategy,
-	};
-	
 	azbn.mdl('express').set('views', azbn.mdl('config').path.pug);
 	azbn.mdl('express').set('view engine', 'pug');
 	
 	
 	
+	var strategies = {
+		yandex : require('passport-yandex').Strategy,
+		google : require('passport-google-oauth20').Strategy,
+	};
 	
 	azbn.mdl('passport').serializeUser(function(user, done) {
 		done(null, user);
@@ -22,40 +22,43 @@ function _(app, azbn) {
 		done(null, obj);
 	});
 	
-	azbn.mdl('passport').use(new strategy.yandex({
-			clientID : 'cf695d3af88d4e28909bb738976d50c1',
-			clientSecret : '7faa7012dace4c4dafc37bd59f31b790',
-			callbackURL : 'http://localhost:17003/authorize/by/yandex/'
-		},
-		function(accessToken, refreshToken, profile, done) {
-			
-			console.dir(arguments);
-			
-			done(err, profile);
-			
-		}
-	));
+	azbn.mdl('express').get('/api/v1/', (new require('./api/v1')(app, azbn)));
+	azbn.mdl('express').post('/api/v1/', (new require('./api/v1')(app, azbn)));
 	
-	azbn.mdl('express').get('/passport/by/yandex/',
-		azbn.mdl('passport').authenticate('yandex'),
-		function(req, res){
-			
-			console.dir(arguments);
-			
-		}
-	);
+	azbn.mdl('express').get('/', (new require('./index')(app, azbn)));
 	
-	azbn.mdl('express').get('/authorize/by/yandex/',
-		azbn.mdl('passport').authenticate('yandex', {
-			failureRedirect : '/',
-			successRedirect : '/robots.txt',
-		}),
-		function(req, res) {
+	for(var strategy in strategies) {
+		
+		(function(s) {
 			
-			console.dir(arguments);
+			var provider_config = app.loadJSON('../config/providers/' + s);
 			
-		}
-	);
+			azbn.mdl('passport').use(new strategies[s](provider_config, function(accessToken, refreshToken, profile, done) {
+				
+				/*
+				console.dir(profile);
+				*/
+				
+				done(null, profile);
+				
+			}));
+			
+			azbn.mdl('express').get('/auth/by/' + s + '/', azbn.mdl('passport').authenticate(s, {
+				scope : provider_config.scope,
+			}));
+			
+			azbn.mdl('express').get('/authorize/by/' + s + '/', azbn.mdl('passport').authenticate(s, {
+				failureRedirect : '/error',
+				successRedirect : '/authorized/by/' + s + '/',
+			}));
+			
+			azbn.mdl('express').get('/authorized/by/' + s + '/', (new require('./authorized/by')(app, azbn)));
+			
+		})(strategy);
+		
+	}
+	
+	
 	
 	/*
 	
@@ -77,10 +80,6 @@ function _(app, azbn) {
 	
 	*/
 	
-	azbn.mdl('express').get('/api/v1/', (new require('./api/v1')(app, azbn)));
-	azbn.mdl('express').post('/api/v1/', (new require('./api/v1')(app, azbn)));
-	
-	azbn.mdl('express').get('/', (new require('./index')(app, azbn)));
 	/*
 	azbn.mdl('express').get('/auth/logout/', (new require('./auth/logout')(app, azbn)));
 	azbn.mdl('express').get('/auth/by/:service/', (new require('./auth/by')(app, azbn)));
