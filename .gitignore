@@ -1,3 +1,2 @@
 data/sessions/sessions.nedb
 data/json/*.json
-config/services/*.json
