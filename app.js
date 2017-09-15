@@ -21,6 +21,8 @@ azbn.mdl('config').port.https = argv.httpsport || azbn.mdl('config').port.https 
 var express = require('express');
 azbn.setMdl('express', express());
 
+azbn.setMdl('passport', require('passport'));
+
 azbn.mdl('express').set('trust proxy', 1);
 
 /*
@@ -56,7 +58,7 @@ azbn.mdl('express').use(express_session({
 	//	return genuuid();
 	//},
 	name : 'aae.app.session',
-	secret : 'secretstring',
+	secret : azbn.randstr(),
 	resave : false,
 	saveUninitialized : false,
 	proxy: true,
@@ -70,6 +72,9 @@ azbn.mdl('express').use(express_session({
 		filename : app.path.data + '/sessions/sessions.nedb',
 	}),
 }));
+
+azbn.mdl('express').use(azbn.mdl('passport').initialize());
+azbn.mdl('express').use(azbn.mdl('passport').session());
 
 // перепись метода
 azbn.mdl('express').use(require('method-override')('_method'));
