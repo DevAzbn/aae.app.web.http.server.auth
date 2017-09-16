@@ -1,9 +1,0 @@
-{
-	"auth_url" : "https://oauth.yandex.ru/authorize?response_type=code&client_id=cf695d3af88d4e28909bb738976d50c1",
-	"app" : {
-		"title" : "Яндекс",
-		"id" : "cf695d3af88d4e28909bb738976d50c1",
-		"secret" : "7faa7012dace4c4dafc37bd59f31b790",
-		"callback_url" : "https://oauth.yandex.ru/verification_code?ncrnd=638188&status=ok"
-	}
-}

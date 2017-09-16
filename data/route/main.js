@@ -26,6 +26,8 @@ function _(app, azbn) {
 	azbn.mdl('express').post('/api/v1/', (new require('./api/v1')(app, azbn)));
 	
 	azbn.mdl('express').get('/', (new require('./index')(app, azbn)));
+	azbn.mdl('express').get('/auth/logout/', (new require('./auth/logout')(app, azbn)));
+	azbn.mdl('express').get('/profile/', (new require('./profile/index')(app, azbn)));
 	
 	for(var strategy in strategies) {
 		
@@ -33,7 +35,7 @@ function _(app, azbn) {
 			
 			var provider_config = app.loadJSON('../config/providers/' + s);
 			
-			azbn.mdl('passport').use(new strategies[s](provider_config, function(accessToken, refreshToken, profile, done) {
+			azbn.mdl('passport').use(new strategies[s](provider_config.auth || {}, function(accessToken, refreshToken, profile, done) {
 				
 				/*
 				console.dir(profile);
@@ -44,13 +46,15 @@ function _(app, azbn) {
 			}));
 			
 			azbn.mdl('express').get('/auth/by/' + s + '/', azbn.mdl('passport').authenticate(s, {
-				scope : provider_config.scope,
+				scope : provider_config.scope || {},
 			}));
 			
 			azbn.mdl('express').get('/authorize/by/' + s + '/', azbn.mdl('passport').authenticate(s, {
 				failureRedirect : '/error',
 				successRedirect : '/authorized/by/' + s + '/',
-			}));
+			}), function(req, res) {
+				req.session.save();
+			});
 			
 			azbn.mdl('express').get('/authorized/by/' + s + '/', (new require('./authorized/by')(app, azbn)));
 			

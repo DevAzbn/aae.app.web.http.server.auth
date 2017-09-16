@@ -58,7 +58,7 @@ azbn.mdl('express').use(express_session({
 	//	return genuuid();
 	//},
 	name : 'aae.app.session',
-	secret : azbn.randstr(),
+	secret : 'aae.app.dev',//azbn.randstr(),
 	resave : false,
 	saveUninitialized : false,
 	proxy: true,
