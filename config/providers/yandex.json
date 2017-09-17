@@ -3,5 +3,8 @@
 		"clientID" : "cf695d3af88d4e28909bb738976d50c1",
 		"clientSecret" : "7faa7012dace4c4dafc37bd59f31b790",
 		"callbackURL" : "http://localhost:17003/authorize/by/yandex/"
+	},
+	"auth_params" : {
+		
 	}
 }

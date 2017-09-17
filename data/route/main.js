@@ -45,15 +45,15 @@ function _(app, azbn) {
 				
 			}));
 			
-			azbn.mdl('express').get('/auth/by/' + s + '/', azbn.mdl('passport').authenticate(s, {
-				scope : provider_config.scope || {},
-			}));
+			azbn.mdl('express').get('/auth/by/' + s + '/', azbn.mdl('passport').authenticate(s, provider_config.auth_params));
 			
 			azbn.mdl('express').get('/authorize/by/' + s + '/', azbn.mdl('passport').authenticate(s, {
 				failureRedirect : '/error',
-				successRedirect : '/authorized/by/' + s + '/',
+				//successRedirect : '/authorized/by/' + s + '/',
 			}), function(req, res) {
-				req.session.save();
+				req.session.save(function(err){
+					res.redirect(307, '/authorized/by/' + s + '/');
+				});
 			});
 			
 			azbn.mdl('express').get('/authorized/by/' + s + '/', (new require('./authorized/by')(app, azbn)));

@@ -4,8 +4,10 @@
 		"clientSecret" : "3PDzjPSesz5N1PL7CF84Vg10",
 		"callbackURL" : "http://localhost:17003/authorize/by/google/"
 	},
-	"scope" : [
-		"https://www.googleapis.com/auth/userinfo.email",
-		"https://www.googleapis.com/auth/userinfo.profile"
-	]
+	"auth_params" : {
+		"scope" : [
+			"https://www.googleapis.com/auth/userinfo.email",
+			"https://www.googleapis.com/auth/userinfo.profile"
+		]
+	}
 }

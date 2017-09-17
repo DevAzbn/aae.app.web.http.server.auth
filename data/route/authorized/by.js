@@ -6,13 +6,24 @@ function _(app, azbn) {
 	
 	return function(req, res) {
 		
-		if(req.session.profile && req.session.passport) {
+		if(req.session.profile) {
 			
-			if(req.session.profile.provided) {
+		} else {
+			
+			req.session.profile = {
+				id : azbn.randstr(),
+				provided : {},
+			};
+			
+		}
+		
+		if(req.session.passport && req.session.passport.user) {
+			
+			var _provided = app.loadJSON('../data/json/passport/' + req.session.passport.user.provider + '/' + req.session.passport.user.id);
+			
+			if(_provided.id && _provided.profile) {
 				
-			} else {
-				
-				req.session.profile.provided = {};
+				req.session.profile = app.loadJSON('../data/json/profiles/' + _provided.profile);
 				
 			}
 			
@@ -20,11 +31,11 @@ function _(app, azbn) {
 				
 			} else {
 				
-				req.session.profile.provided[req.session.passport.user.provider] = [];
+				req.session.profile.provided[req.session.passport.user.provider] = {};
 				
 			}
 			
-			req.session.profile.provided[req.session.passport.user.provider].push(req.session.passport);
+			req.session.profile.provided[req.session.passport.user.provider][req.session.passport.user.id] = req.session.passport;
 			
 			app.saveJSON('../data/json/passport/' + req.session.passport.user.provider + '/' + req.session.passport.user.id, {
 				provider : req.session.passport.user.provider,
@@ -34,65 +45,28 @@ function _(app, azbn) {
 			
 		} else {
 			
-			req.session.profile = {
-				id : azbn.randstr(),
-				provided : {},
-			};
-			
-			if(req.session.passport) {
-				
-				if(req.session.profile.provided[req.session.passport.user.provider]) {
-					
-				} else {
-					
-					req.session.profile.provided[req.session.passport.user.provider] = [];
-					
-				}
-				
-				var providing = app.loadJSON('../data/json/passport/' + req.session.passport.user.provider + '/' + req.session.passport.user.id);
-				
-				var _profile = app.loadJSON('../data/json/profiles/' + providing.profile);
-				
-				req.session.profile = _profile;
-				
-				if(req.session.profile.provided[req.session.passport.user.provider].length) {
-					
-					for(var i = 0; i < req.session.profile.provided[req.session.passport.user.provider].length; i++) {
-						
-						var _provider = req.session.profile.provided[req.session.passport.user.provider][i];
-						
-						if(1) {
-							
-						}
-						
-					}
-					
-				}
-				
-				req.session.profile.provided[req.session.passport.user.provider].push(req.session.passport);
-				
-				app.saveJSON('../data/json/passport/' + req.session.passport.user.provider + '/' + req.session.passport.user.id, {
-					provider : req.session.passport.user.provider,
-					id : req.session.passport.user.id,
-					profile : req.session.profile.id,
-				});
-				
-			} else {
-				
-				req.session.profile = false;
-				
-			}
+			req.session.profile = false;
 			
 		}
 		
-		if(req.session.profile) {
+		if(req.session.profile && req.session.profile.id) {
+			
 			app.saveJSON('../data/json/profiles/' + req.session.profile.id, req.session.profile);
+			
+			req.session.save(function(err){
+				res.redirect(307, '/profile/');
+			});
+			
+		} else {
+			
+			res.redirect(307, '/');
+			
 		}
 		
 		//req.session.save();
 		
 		//res.send(req.session.profile);
-		res.redirect(307, '/profile/');
+		
 		
 		/*
 		{
