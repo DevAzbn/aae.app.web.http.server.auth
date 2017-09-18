@@ -1,3 +1,4 @@
 header.header
-	if session.by
+	if profile.id
+		p Залогинены как: #{profile.name}.
 		p <a href="/auth/logout/" >Выйти</a>

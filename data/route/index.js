@@ -18,7 +18,8 @@ function _(app, azbn) {
 						title : 'Выберите сервис для подключения',
 					},
 				},
-				session : {},
+				profile : req.session.profile || {},
+				profile_data : req.session.profile_data || {},
 				data : {
 					services : [
 						{
