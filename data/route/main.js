@@ -12,6 +12,10 @@ function _(app, azbn) {
 	var strategies = {
 		yandex : require('passport-yandex').Strategy,
 		google : require('passport-google-oauth20').Strategy,
+		github : require('passport-github2').Strategy,
+		twitter : require('passport-twitter').Strategy,
+		facebook : require('passport-facebook').Strategy,
+		vkontakte : require('passport-vkontakte').Strategy,
 	};
 	
 	azbn.mdl('passport').serializeUser(function(user, done) {

@@ -1,0 +1,10 @@
+{
+	"auth" : {
+		"clientID" : "62547aca29ccd0987a41",
+		"clientSecret" : "75cbfcb273540ba61aaae1b4b5331c2a6d1cb07a",
+		"callbackURL" : "http://localhost:17003/authorize/by/github/"
+	},
+	"auth_params" : {
+		
+	}
+}

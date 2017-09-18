@@ -1,0 +1,10 @@
+{
+	"auth" : {
+		"clientID" : "1895394010714061",
+		"clientSecret" : "6c1202ade10fd5f73ceeb5004846d2bc",
+		"callbackURL" : "http://localhost:17003/authorize/by/vkontakte/"
+	},
+	"auth_params" : {
+		
+	}
+}

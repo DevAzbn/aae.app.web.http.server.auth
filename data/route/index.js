@@ -30,12 +30,22 @@ function _(app, azbn) {
 							uid : 'google',
 							title : 'Google',
 						},
-						/*
 						{
-							uid : 'vk',
-							title : 'VK.com',
+							uid : 'github',
+							title : 'Github',
 						},
-						*/
+						{
+							uid : 'twitter',
+							title : 'Twitter',
+						},
+						{
+							uid : 'facebook',
+							title : 'Facebook',
+						},
+						{
+							uid : 'vkontakte',
+							title : 'VKontakte',
+						}
 					],
 				},
 			});
