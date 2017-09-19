@@ -45,6 +45,10 @@ function _(app, azbn) {
 						{
 							uid : 'vkontakte',
 							title : 'VKontakte',
+						},
+						{
+							uid : 'mailru',
+							title : 'MailRu',
 						}
 					],
 				},

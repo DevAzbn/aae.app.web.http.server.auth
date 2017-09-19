@@ -1,0 +1,11 @@
+{
+	"auth" : {
+		"clientID" : "756097",
+		"clientSecret" : "e4f7f794ffbac31073edad413de96f95",
+		"clientPrivateKey" : "073e49c54c709b5f0643a1fdf36d45a8",
+		"callbackURL" : "http://localhost:17003/authorize/by/mailru/"
+	},
+	"auth_params" : {
+		
+	}
+}
