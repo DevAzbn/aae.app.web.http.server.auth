@@ -8,7 +8,7 @@ html
 		each accounts, provider in profile.provided
 			div #{provider}
 				each item, user_id in accounts
-					p #{item.user.displayName}
+					p #{item.user.displayName} #{item.user.username}
 		h2 Группы
 		each group in profile_data.groups
 			div #{group}

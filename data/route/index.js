@@ -43,6 +43,10 @@ function _(app, azbn) {
 							title : 'Facebook',
 						},
 						{
+							uid : 'instagram',
+							title : 'Instagram',
+						},
+						{
 							uid : 'vkontakte',
 							title : 'VKontakte',
 						},

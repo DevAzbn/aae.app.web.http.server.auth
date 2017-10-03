@@ -1,0 +1,10 @@
+{
+	"auth" : {
+		"clientID" : "6c44117204cb4e41a4e7544bee247844",
+		"clientSecret" : "e13ca3efe28d41be8c961cf14b4e95e1",
+		"callbackURL" : "http://localhost:17003/authorize/by/instagram/"
+	},
+	"auth_params" : {
+		
+	}
+}

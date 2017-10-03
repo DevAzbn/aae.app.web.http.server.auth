@@ -17,6 +17,7 @@ function _(app, azbn) {
 		facebook : require('passport-facebook').Strategy,
 		vkontakte : require('passport-vkontakte').Strategy,
 		mailru : require('passport-mailru').Strategy,
+		instagram : require('passport-instagram').Strategy,
 	};
 	
 	azbn.mdl('passport').serializeUser(function(user, done) {
